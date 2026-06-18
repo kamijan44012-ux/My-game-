@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#05010f" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="description" content="Star Duel — a neon space shooter for two pilots. Best graphics, best sound." />
+  <title>Star Duel — Space Shooter</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <canvas id="game"></canvas>
+
+    <!-- ===== Heads-up display (in-game) ===== -->
+    <div id="hud" class="hud hidden">
+      <div class="hud-player hud-top">
+        <span class="hud-name" id="p2name">ENEMY</span>
+        <div class="bar"><div class="bar-fill bar-enemy" id="p2health"></div></div>
+        <div class="bar shield"><div class="bar-fill bar-shield" id="p2shield"></div></div>
+        <span class="hud-score" id="p2score">0</span>
+      </div>
+      <div class="hud-player hud-bottom">
+        <span class="hud-name" id="p1name">YOU</span>
+        <div class="bar"><div class="bar-fill bar-player" id="p1health"></div></div>
+        <div class="bar shield"><div class="bar-fill bar-shield" id="p1shield"></div></div>
+        <span class="hud-score" id="p1score">0</span>
+      </div>
+      <button id="pauseBtn" class="icon-btn" aria-label="Pause">II</button>
+    </div>
+
+    <!-- ===== Touch controls ===== -->
+    <div id="touchControls" class="touch hidden">
+      <div id="joystick" class="joystick"><div class="joystick-knob"></div></div>
+      <button id="fireBtn" class="fire-btn">FIRE</button>
+    </div>
+
+    <!-- ===== Main menu ===== -->
+    <div id="menu" class="overlay">
+      <div class="menu-card">
+        <h1 class="title">STAR&nbsp;DUEL</h1>
+        <p class="subtitle">NEON SPACE SHOOTER</p>
+        <div class="menu-buttons">
+          <button class="btn btn-primary" data-mode="ai">⚔️ Play vs Computer</button>
+          <button class="btn" data-mode="local">👥 2 Players (1 Device)</button>
+          <button class="btn btn-ghost" data-mode="online" id="onlineBtn">🌐 Online Duel <small>(soon)</small></button>
+        </div>
+        <div class="menu-footer">
+          <button id="soundToggle" class="chip">🔊 Sound: ON</button>
+          <button id="howtoBtn" class="chip">❔ How to play</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== How to play ===== -->
+    <div id="howto" class="overlay hidden">
+      <div class="menu-card">
+        <h2 class="title small">HOW TO PLAY</h2>
+        <ul class="howto-list">
+          <li>📱 <b>Touch:</b> drag the left joystick to fly, tap <b>FIRE</b> to shoot.</li>
+          <li>⌨️ <b>Player 1:</b> <kbd>A</kbd>/<kbd>D</kbd> or arrows to move, <kbd>Space</kbd> to fire.</li>
+          <li>⌨️ <b>Player 2:</b> <kbd>J</kbd>/<kbd>L</kbd> to move, <kbd>Enter</kbd> to fire.</li>
+          <li>💥 Destroy the enemy ship. First to drain the other's health wins the round.</li>
+          <li>✨ Grab glowing power-ups for shields, rapid-fire and triple-shot.</li>
+        </ul>
+        <button class="btn btn-primary" id="howtoBack">Back</button>
+      </div>
+    </div>
+
+    <!-- ===== Pause ===== -->
+    <div id="pauseMenu" class="overlay hidden">
+      <div class="menu-card">
+        <h2 class="title small">PAUSED</h2>
+        <div class="menu-buttons">
+          <button class="btn btn-primary" id="resumeBtn">Resume</button>
+          <button class="btn" id="quitBtn">Quit to Menu</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Game over ===== -->
+    <div id="gameover" class="overlay hidden">
+      <div class="menu-card">
+        <h2 class="title small" id="resultText">VICTORY</h2>
+        <p class="result-sub" id="resultSub"></p>
+        <div class="menu-buttons">
+          <button class="btn btn-primary" id="rematchBtn">Rematch</button>
+          <button class="btn" id="menuBtn">Main Menu</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Online placeholder ===== -->
+    <div id="onlineInfo" class="overlay hidden">
+      <div class="menu-card">
+        <h2 class="title small">ONLINE DUEL</h2>
+        <p class="result-sub">Real-time online play between two pilots is wired up and ready —
+        it just needs your Firebase keys to go live. Send them over and online matchmaking
+        switches on instantly. For now, enjoy <b>vs Computer</b> and <b>2 Players</b> mode!</p>
+        <button class="btn btn-primary" id="onlineBack">Back</button>
+      </div>
+    </div>
+
+    <div id="loadHint" class="load-hint">Tap to start ✦</div>
+  </div>
+
+  <script src="js/audio.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
