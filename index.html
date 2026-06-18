@@ -47,8 +47,10 @@
           <button class="btn btn-primary" data-mode="ai">⚔️ Play vs Computer</button>
           <button class="btn" data-mode="local">👥 2 Players (1 Device)</button>
           <button class="btn btn-ghost" data-mode="online" id="onlineBtn">🌐 Online Duel <small>(soon)</small></button>
+          <a class="btn btn-coins" href="trade.html">💰 Coin Market</a>
         </div>
         <div class="menu-footer">
+          <button id="coinChip" class="chip">🪙 0 coins</button>
           <button id="soundToggle" class="chip">🔊 Sound: ON</button>
           <button id="howtoBtn" class="chip">❔ How to play</button>
         </div>
@@ -86,6 +88,7 @@
       <div class="menu-card">
         <h2 class="title small" id="resultText">VICTORY</h2>
         <p class="result-sub" id="resultSub"></p>
+        <div class="reward-badge hidden" id="rewardBadge">🪙 +10 coins!</div>
         <div class="menu-buttons">
           <button class="btn btn-primary" id="rematchBtn">Rematch</button>
           <button class="btn" id="menuBtn">Main Menu</button>
@@ -108,6 +111,8 @@
   </div>
 
   <script src="js/audio.js"></script>
+  <script src="js/wallet.js"></script>
+  <script src="js/market.js"></script>
   <script src="js/game.js"></script>
 </body>
 </html>

@@ -417,6 +417,27 @@
         Game.mode === "local" ? (p1dead ? "PLAYER 2 WINS" : "PLAYER 1 WINS") : (win ? "VICTORY" : "DEFEATED");
       document.getElementById("resultSub").textContent =
         win ? "Stellar flying, pilot! 🚀" : "Your ship was destroyed. Try again!";
+
+      // ---- Coin reward: winner is paid from the admin treasury ----
+      const badge = document.getElementById("rewardBadge");
+      badge.classList.add("hidden");
+      // In local 2-player mode there's no single "you", so no wallet reward.
+      if (window.Wallet && Game.mode !== "local") {
+        if (win) {
+          const r = Wallet.awardWin();
+          if (r.ok) {
+            badge.textContent = "🪙 +" + r.amount + " coins!";
+            badge.classList.remove("hidden");
+          } else if (r.reason === "treasury_empty") {
+            badge.textContent = "🏦 Treasury empty!";
+            badge.classList.remove("hidden");
+          }
+        } else {
+          Wallet.recordLoss();
+        }
+        updateCoinChip();
+      }
+
       show("gameover");
       A.stopMusic();
       win ? A.win() : A.lose();
@@ -553,6 +574,15 @@
     A.unlock(); A.setEnabled(soundOn);
     soundBtn.textContent = soundOn ? "🔊 Sound: ON" : "🔇 Sound: OFF";
   });
+
+  // Coin balance chip on the menu
+  function updateCoinChip() {
+    if (!window.Wallet) return;
+    const c = document.getElementById("coinChip");
+    if (c) c.textContent = "🪙 " + Wallet.user.coins.toLocaleString() + " coins";
+  }
+  if (window.Wallet) Wallet.onChange(updateCoinChip);
+  document.getElementById("coinChip").addEventListener("click", () => { location.href = "trade.html"; });
 
   // Hide the "tap to start" hint after first interaction
   const hint = document.getElementById("loadHint");

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#05010f" />
+  <title>Coin Market — Star Duel</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/trade.css" />
+</head>
+<body class="trade-body">
+  <header class="trade-header">
+    <a href="index.html" class="back-link">‹ Game</a>
+    <h1 class="trade-title">⭐ COIN MARKET</h1>
+    <button id="authChip" class="chip">Sign in</button>
+  </header>
+
+  <section class="wallet-strip">
+    <div class="wallet-box">
+      <span class="wallet-label">🪙 Your Coins</span>
+      <span class="wallet-val" id="wCoins">0</span>
+    </div>
+    <div class="wallet-box">
+      <span class="wallet-label">💵 Cash</span>
+      <span class="wallet-val" id="wCash">$0</span>
+    </div>
+    <div class="wallet-box">
+      <span class="wallet-label">📊 Portfolio</span>
+      <span class="wallet-val" id="wPortfolio">$0</span>
+    </div>
+  </section>
+
+  <section class="price-row">
+    <div>
+      <div class="price-now" id="priceNow">$0.00</div>
+      <div class="price-sym">STAR / CASH</div>
+    </div>
+    <div class="price-change" id="priceChange">+0.00%</div>
+  </section>
+
+  <div class="chart-wrap">
+    <canvas id="chart"></canvas>
+  </div>
+
+  <div class="range-row" id="rangeRow">
+    <button class="range-btn active" data-n="30">1m</button>
+    <button class="range-btn" data-n="60">5m</button>
+    <button class="range-btn" data-n="120">15m</button>
+    <button class="range-btn" data-n="180">All</button>
+  </div>
+
+  <section class="trade-panel">
+    <div class="qty-row">
+      <button class="qty-btn" data-q="-10">−10</button>
+      <button class="qty-btn" data-q="-1">−1</button>
+      <input id="qty" type="number" min="1" value="10" inputmode="numeric" />
+      <button class="qty-btn" data-q="1">+1</button>
+      <button class="qty-btn" data-q="10">+10</button>
+    </div>
+    <div class="qty-presets">
+      <button class="preset" data-pct="0.25">25%</button>
+      <button class="preset" data-pct="0.5">50%</button>
+      <button class="preset" data-pct="1">MAX</button>
+    </div>
+    <div class="cost-line" id="costLine">Cost: $0.00</div>
+    <div class="trade-actions">
+      <button class="trade-btn buy" id="buyBtn">BUY</button>
+      <button class="trade-btn sell" id="sellBtn">SELL</button>
+    </div>
+    <div class="toast" id="toast"></div>
+  </section>
+
+  <!-- Admin panel (visible only to admin) -->
+  <section class="admin-panel hidden" id="adminPanel">
+    <h3>🛡️ Admin — Reward Treasury</h3>
+    <p>Match wins pay <b id="rewardLbl">10</b> coins out of this pool (separate from your own coins).</p>
+    <div class="treasury-val">🏦 <span id="treasuryVal">0</span> coins</div>
+  </section>
+
+  <!-- Sign-in dialog (Google placeholder) -->
+  <div id="authOverlay" class="overlay hidden">
+    <div class="menu-card">
+      <h2 class="title small">SIGN IN</h2>
+      <p class="result-sub">Real Google sign-in turns on with Firebase. For now,
+      create a local pilot profile to try the market.</p>
+      <input id="nameInput" class="name-input" placeholder="Pilot name" />
+      <div class="menu-buttons">
+        <button class="btn btn-primary" id="googleBtn">▶ Continue with Google <small>(demo)</small></button>
+        <button class="btn" id="adminBtn">🛡️ Sign in as Admin</button>
+        <button class="btn btn-ghost" id="authClose">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/wallet.js"></script>
+  <script src="js/market.js"></script>
+  <script src="js/trade.js"></script>
+</body>
+</html>
